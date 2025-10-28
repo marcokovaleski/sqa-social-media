@@ -5,11 +5,14 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export default function Input({ label, error, ...props }: InputProps) {
+export default function Input({ label, error, id, ...props }: InputProps) {
+  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+  
   return (
     <div style={{ marginBottom: "1rem" }}>
       {label && (
         <label
+          htmlFor={inputId}
           style={{
             display: "block",
             marginBottom: "0.5rem",
@@ -21,6 +24,7 @@ export default function Input({ label, error, ...props }: InputProps) {
         </label>
       )}
       <input
+        id={inputId}
         {...props}
         style={{
           width: "100%",
