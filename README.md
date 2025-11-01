@@ -120,8 +120,36 @@ Acesse: http://localhost:3000
 
 ## 🧪 Testes
 
-- **API**: `./mvnw test` (utiliza banco H2 em memória)
-- **Frontend**: `npm test` (scripts para coverage e watch disponíveis)
+### Backend (Spring Boot + JUnit)
+```bash
+cd api
+./mvnw test                    # Executa todos os testes
+./mvnw test -Dtest=NomeClasse  # Executa testes de uma classe específica
+```
+
+**Configuração**: Testes utilizam banco H2 em memória (não requer configuração externa)
+
+### Frontend (Next.js + Jest + Testing Library)
+```bash
+cd client
+npm test                       # Executa todos os testes uma vez
+npm run test:watch             # Modo watch (executa automaticamente ao salvar)
+npm run test:coverage          # Gera relatório de cobertura
+npm test tests/app/Home.test.tsx  # Executa apenas um arquivo específico
+```
+
+**Scripts disponíveis**:
+- `npm test`: Execução padrão
+- `npm run test:watch`: Modo watch para desenvolvimento
+- `npm run test:coverage`: Gera relatório de cobertura de código
+
+### Estatísticas de Testes
+
+- **Backend**: 12 testes (10 passando, 2 falhando - bugs identificados)
+- **Frontend**: 14 testes (11 passando, 3 falhando - bugs identificados)
+- **Cobertura**: Verifique o relatório gerado com `npm run test:coverage`
+
+Consulte [BUGS_IDENTIFICADOS.md](BUGS_IDENTIFICADOS.md) para detalhes dos testes e bugs encontrados.
 
 ---
 

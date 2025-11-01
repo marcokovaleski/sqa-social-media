@@ -28,6 +28,7 @@ public class AuthControllerTests {
     private AuthController authController;
 
     private UserDTO validUserDTO;
+    private UserDTO invalidUserDTO;
     private User mockUser;
 
     @BeforeEach
@@ -35,6 +36,10 @@ public class AuthControllerTests {
         validUserDTO = new UserDTO();
         validUserDTO.setEmail("test@example.com");
         validUserDTO.setPassword("Test123!");
+
+        invalidUserDTO = new UserDTO();
+        invalidUserDTO.setEmail("test@");
+        invalidUserDTO.setPassword("password123");
 
         mockUser = new User();
         mockUser.setId(1L);
@@ -62,7 +67,7 @@ public class AuthControllerTests {
     void testSignupInvalidEmail() {
         when(userService.isEmailValid(any())).thenReturn(false);
 
-        ResponseEntity<?> response = authController.signup(validUserDTO);
+        ResponseEntity<?> response = authController.signup(invalidUserDTO);
 
         assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, response.getStatusCode());
         verify(userService, never()).createUser(any(), any());
@@ -88,7 +93,7 @@ public class AuthControllerTests {
         when(userService.isPasswordValid(any())).thenReturn(true);
         when(userService.findByEmail(any())).thenReturn(null);
 
-        ResponseEntity<?> response = authController.signin(validUserDTO);
+        ResponseEntity<?> response = authController.signin(invalidUserDTO);
 
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }

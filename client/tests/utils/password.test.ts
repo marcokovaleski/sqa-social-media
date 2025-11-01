@@ -18,7 +18,7 @@ describe("Utils - Password", () => {
     test("should return false for invalid passwords", () => {
       const invalidPasswords = [
         "password",
-        "PASSWORD", 
+        "PASSWORD",
         "Password",
         "Password1",
         "Pass1!",
@@ -36,9 +36,9 @@ describe("Utils - Password", () => {
       // Este teste DEVERIA FALHAR porque a implementação atual
       // rejeita incorretamente senhas com exatamente 8 caracteres
       // A condição `password.length <= 8` deveria ser `password.length < 8`
-      
+
       const passwordWithExactly8Chars = "Pass123!";
-      
+
       // Deveria ser true (senha válida) mas a implementação atual retorna false
       expect(isPasswordValid(passwordWithExactly8Chars)).toBe(true);
     });
